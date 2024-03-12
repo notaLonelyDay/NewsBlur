@@ -180,6 +180,7 @@ services:
     container_name: newsblur_haproxy
     image: haproxy:latest
     restart: unless-stopped
+    user: "0:0"
     depends_on:
       - nginx
       - newsblur_web
@@ -198,8 +199,6 @@ services:
       - ${PWD}:/srv/newsblur
     networks:
       newsblur:
-    sysctls:
-      - net.ipv4.ip_unprivileged_port_start=0
 
 
 networks:
