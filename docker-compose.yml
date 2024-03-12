@@ -2,7 +2,7 @@ version: '2'
 services:
 
   newsblur_web:
-    hostname: newsblur_web
+    hostname: nb.com
     container_name: newsblur_web
     image: newsblur/newsblur_${NEWSBLUR_BASE:-python3}:latest
     # build:
