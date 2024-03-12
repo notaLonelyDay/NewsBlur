@@ -200,7 +200,7 @@ services:
       - ${PWD}:/srv/newsblur
     networks:
       newsblur:
-        ipv4_address: 172.28.0.4
+        ipv4_address: 172.28.0.100
 
 
 networks:
