@@ -10,7 +10,7 @@ nb: pull bounce migrate bootstrap collectstatic
 metrics:
 	RUNWITHMAKEBUILD=True CURRENT_UID=${CURRENT_UID} CURRENT_GID=${CURRENT_GID} docker compose -f docker-compose.yml -f docker-compose.metrics.yml up -d
 
-collectstatic: 
+collectstatic:
 	rm -fr static
 	docker pull newsblur/newsblur_deploy
 	docker run --rm -v $(shell pwd):/srv/newsblur newsblur/newsblur_deploy
@@ -18,7 +18,6 @@ collectstatic:
 #creates newsblur, builds new images, and creates/refreshes SSL keys
 bounce:
 	RUNWITHMAKEBUILD=True CURRENT_UID=${CURRENT_UID} CURRENT_GID=${CURRENT_GID} docker compose down
-	[[ -d config/certificates ]] && echo "keys exist" || make keys
 	RUNWITHMAKEBUILD=True CURRENT_UID=${CURRENT_UID} CURRENT_GID=${CURRENT_GID} docker compose up -d --build --remove-orphans
 
 bootstrap:
@@ -31,7 +30,7 @@ coffee:
 migrations:
 	docker exec -it newsblur_web ./manage.py makemigrations
 makemigration: migrations
-datamigration: 
+datamigration:
 	docker exec -it newsblur_web ./manage.py makemigrations --empty $(app)
 migration: migrations
 migrate:
@@ -51,7 +50,7 @@ logcelery:
 logtask: logcelery
 logmongo:
 	RUNWITHMAKEBUILD=True docker compose logs -f db_mongo
-alllogs: 
+alllogs:
 	RUNWITHMAKEBUILD=True docker compose logs -f --tail 20
 logall: alllogs
 mongo:
@@ -128,11 +127,11 @@ local_build_web:
 	docker build . --file=docker/newsblur_base_image.Dockerfile --tag=newsblur/newsblur_python3
 build_web:
 	docker buildx build . --platform linux/amd64,linux/arm64 --file=docker/newsblur_base_image.Dockerfile --tag=newsblur/newsblur_python3
-build_node: 
+build_node:
 	docker buildx build . --platform linux/amd64,linux/arm64 --file=docker/node/Dockerfile --tag=newsblur/newsblur_node
-build_monitor: 
+build_monitor:
 	docker buildx build . --platform linux/amd64,linux/arm64 --file=docker/monitor/Dockerfile --tag=newsblur/newsblur_monitor
-build_deploy: 
+build_deploy:
 	docker buildx build . --platform linux/amd64,linux/arm64 --file=docker/newsblur_deploy.Dockerfile --tag=newsblur/newsblur_deploy
 build: build_web build_node build_monitor build_deploy
 push_web:
