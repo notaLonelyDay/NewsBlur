@@ -33,7 +33,6 @@ services:
       - ${PWD}:/srv/newsblur
     networks:
       newsblur:
-        ipv4_address: 172.28.0.4
 
   newsblur_node:
     container_name: newsblur_node
@@ -201,6 +200,7 @@ services:
       - ${PWD}:/srv/newsblur
     networks:
       newsblur:
+        ipv4_address: 172.28.0.4
 
 
 networks:
