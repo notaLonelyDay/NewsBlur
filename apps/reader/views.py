@@ -126,6 +126,7 @@ ALLOWED_SUBDOMAINS = [
     'staging2',
     'staging3',
     'nb',
+    'test'
 ]
 
 def get_subdomain(request):
